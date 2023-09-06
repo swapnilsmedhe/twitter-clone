@@ -9,6 +9,9 @@
   "author": "Swapnil Medhe",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "neo4j": "^2.0.0-RC2",
+    "neo4j-driver": "^5.12.0"
   }
 }
