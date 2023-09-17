@@ -1,11 +1,7 @@
-const createSignupHanlder = (neo4jSession) => {
+const createSignupHanlder = (userRepository) => {
   return (req, res) => {
-    neo4jSession.executeWrite((tx) => {
-      const { username, password } = req.body;
-      tx.run(
-        `CREATE(user:User {name: "${username}", password: "${password}"})`
-      );
-    });
+    const { username, password } = req.body;
+    userRepository.createUser({ username, password });
     res.sendStatus(201);
   };
 };

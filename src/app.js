@@ -1,6 +1,7 @@
 const express = require("express");
 const { driver, auth, session } = require("neo4j-driver");
 const { createSignupHanlder } = require("./handlers/signup");
+const { UserRepository } = require("./userRepository");
 
 const createApp = () => {
   const app = express();
@@ -15,8 +16,10 @@ const createApp = () => {
     defaultAccessMode: session.WRITE,
   });
 
+  const userRepository = new UserRepository(neo4jSession);
+
   app.use(express.json());
-  app.post("/signup", createSignupHanlder(neo4jSession));
+  app.post("/signup", createSignupHanlder(userRepository));
   app.get("/", (req, res) => res.send("Welcome to my twitter clone"));
 
   return app;
